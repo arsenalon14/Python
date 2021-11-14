@@ -31,11 +31,11 @@ while True:
     elif chooe == "4":
       result4 = multiply(num1,num2)
       print(result4)
-else:
-  print("Input Wrong number")
+  else:
+    print("Input Wrong number")
   
   
-  print("Thank You")
+     print("Thank You")
   break
 
 
