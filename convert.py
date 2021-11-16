@@ -1,3 +1,5 @@
+## make convert program that convert from/to celsius to/from fahrenheit.
+
 def far(x):
     return (x*(5/9)+32)
 def cel(x):
