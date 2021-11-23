@@ -1,7 +1,10 @@
 ## make convert program that convert from/to celsius to/from fahrenheit.
 
+## Convert Fahrenheit to Celsius.
 def far(x):
     return (x*(5/9)+32)
+
+## Convert Celsius to Fahrenheit
 def cel(x):
     return ((x-32)*5/9)
 
@@ -11,6 +14,7 @@ print("Type 2 for fahrenheit ot celsius")
 
 
 while True:
+## input only 1 or 2
     answer = input()
     if answer in ("1"):
         num1 = float(input("Please insert number in Celsius: "))
