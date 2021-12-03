@@ -1,2 +1,3 @@
 # Python
-All code is Python.
+All code in this page is Python.
+
