@@ -29,7 +29,7 @@ while not complete:
         print(f"From {num2} Fahrenheit is {result2:.2f} Celsius")
         complete = True
     else: ## If input other number
-        print("Wrong number\nPlease in put number again\nType 1 for Celsius to fahrenheit\nType 2 for fahrenheit ot celsius)
+        print("Wrong number\nPlease in put number again\nType 1 for Celsius to fahrenheit\nType 2 for fahrenheit ot celsius")
     continue
     
 print("Exiting program")
