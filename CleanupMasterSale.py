@@ -26,13 +26,15 @@ def cleanup(df):
     df["Product Category"] = df["Product Category"].fillna("Combo")
     df["Promo Ref ID"] = df["Promo Ref ID"].fillna("À la carte")
     df.columns = df.columns.str.replace(" ", "")
+    df["FlightDate"] = pd.to_datetime(df["FlightDate"], format="%d/%m/%Y")
+    df["FlightDate"] = df["FlightDate"].apply(lambda x: f"{x.year}-{x.month}-{x.day} 0:00")
     df[["Country","Sector","Sector2"]] = ""
-    df["Country"] = np.where(df["CountryofDestination"]=="THAILAND",df["CountryofOrigin"],df["CountryofDestination"])
     mask1 = (df["Origin"]=="CNX")&(df["Destination"]=="CTS")
     mask2 = (df["Origin"]=="CTS")&(df["Destination"]=="CNX")
     combine_mask = mask1 | mask2
     df.loc[combine_mask,"Destination"] = "TPE"
     df.loc[combine_mask,"CountryofDestination"] = "TAIWAN"
+    df["Country"] = np.where(df["CountryofDestination"]=="THAILAND",df["CountryofOrigin"],df["CountryofDestination"])
     df["Sector"] = df["Origin"]+df["Destination"]
     df["Sector2"] = df["Destination"]+df["Origin"]
     df=df.rename(columns={"DepartureTime(STD)":"DepartureTime","NetSales(Base)":"NetSales"})
