@@ -19,7 +19,7 @@ def cleanup(df):
         'Bill Discount Type','Bill Discount Rate','Bill Discount Amount','Bill Subtotal','Card Holder Name',
         'Authorization Date','Authorization Time','Settlement Date','Refund Reason','Refund Remarks',
         'Device Name','Device ID','Seat Number','AUD','CNY','CUP','EUR','HKD','IDR','INR','JPY','MYR',
-        'PHP','SGD','THB','TWD','USD','Card'
+        'PHP','SGD','THB','TWD','USD','Card','GBP','KRW','NZD','SAR'
         ], errors='ignore')
     df["Flight Number"] = df["Flight Number"].str.extract(r'(\d+)').astype(int)  
     df = df[df["Payment Status"]!='Refunded']
@@ -28,6 +28,11 @@ def cleanup(df):
     df.columns = df.columns.str.replace(" ", "")
     df[["Country","Sector","Sector2"]] = ""
     df["Country"] = np.where(df["CountryofDestination"]=="THAILAND",df["CountryofOrigin"],df["CountryofDestination"])
+    mask1 = (df["Origin"]=="CNX")&(df["Destination"]=="CTS")
+    mask2 = (df["Origin"]=="CTS")&(df["Destination"]=="CNX")
+    combine_mask = mask1 | mask2
+    df.loc[combine_mask,"Destination"] = "TPE"
+    df.loc[combine_mask,"CountryofDestination"] = "TAIWAN"
     df["Sector"] = df["Origin"]+df["Destination"]
     df["Sector2"] = df["Destination"]+df["Origin"]
     df=df.rename(columns={"DepartureTime(STD)":"DepartureTime","NetSales(Base)":"NetSales"})
